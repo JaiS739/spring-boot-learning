@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
         List<Student> students = studentRepository.findAll();
         return students
                 .stream()
-                .map(student -> new StudentDto(student.getId(), student.getName(), student.getEmail()))
+                .map(student -> new StudentDto(student.getId(), student.getName()))
                 .toList();
     }
 }

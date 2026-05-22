@@ -19,14 +19,14 @@ import java.time.LocalDateTime;
 @Table(name = "MarchProduct", uniqueConstraints = {
         @UniqueConstraint(name="sku_unique", columnNames = {"sku"})
 })
-public class Product {
+public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String sku;
 
-    @Column(length = 15)
+    @Column(length = 30)
     private String title;
 
     private BigDecimal price;

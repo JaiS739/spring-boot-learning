@@ -18,7 +18,7 @@ public class FoodController {
 
     @GetMapping
     public ResponseEntity<String> getAllFoods(){
-        int result = 8/0;
+//        int result = 8/0;
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body("User created");
