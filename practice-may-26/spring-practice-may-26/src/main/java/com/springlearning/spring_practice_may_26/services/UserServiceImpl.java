@@ -3,9 +3,11 @@ package com.springlearning.spring_practice_may_26.services;
 import com.springlearning.spring_practice_may_26.dto.SignupDTO;
 import com.springlearning.spring_practice_may_26.dto.UserDTO;
 import com.springlearning.spring_practice_may_26.entities.User;
+import com.springlearning.spring_practice_may_26.exception.ResourceNotFoundException;
 import com.springlearning.spring_practice_may_26.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,7 +38,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO getUserById(Long userId){
-        User user =  userRepository.findById(userId).orElseThrow(() -> new NoSuchElementException("No user found with the given userId " + userId));
+        User user =  userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("No user found with the given userId " + userId));
         return modelMapper.map(user, UserDTO.class);
     }
 
