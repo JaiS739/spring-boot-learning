@@ -4,10 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,7 +17,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class User implements UserDetails {
+
+//    By implementing UserDetails in the User entity, we allow Spring Security to directly use our database user object during authentication. Methods like getUsername(), getPassword(), and getAuthorities() provide the credentials and roles required by Spring Security to authenticate and authorize users.
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
@@ -35,9 +36,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(
-                new SimpleGrantedAuthority(role)
-        );
+        return List.of(new SimpleGrantedAuthority(role));
     }
 
     @Override
@@ -45,6 +44,8 @@ public class User implements UserDetails {
         return email;
     }
 
+    //    below are the default methods -
+//    A default method means - An interface can provide an implementation, and implementing classes are not required to override it.
     @Override
     public boolean isAccountNonExpired() {
         return true;
