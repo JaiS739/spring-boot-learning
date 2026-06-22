@@ -1,0 +1,19 @@
+User enters email/password
+           |
+           ▼
+Spring Security
+           |
+           ▼
+loadUserByUsername()
+           |
+           ▼
+Database Lookup
+           |
+           ▼
+Return UserDetails
+           |
+           ▼
+Compare Passwords
+           |
+           ▼
+Success / Failure

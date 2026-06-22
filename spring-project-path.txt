@@ -1,0 +1,19 @@
+High Priority
+    Entity Relationships
+    Validation (@Valid)
+    Pagination
+    Sorting
+    Filtering
+    Exception Handling
+    Transactions
+
+Medium Priority
+    Caching
+    Redis
+    Docker
+    Swagger/OpenAPI    
+
+Later
+    Microservices
+    Kafka
+    Spring Cloud    

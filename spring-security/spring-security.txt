@@ -1,0 +1,138 @@
+# Spring Security: Principal, Authentication, and SecurityContext
+
+## Hierarchy
+
+SecurityContext
+└── Authentication
+└── Principal
+
+---
+
+## 1. Principal
+
+The Principal represents the currently authenticated user.
+
+It answers:
+
+"Who is logged in?"
+
+Examples:
+
+* Username: "jai"
+* UserDetails object
+* Custom UserEntity
+
+Example:
+
+Principal = UserEntity(id=1, username="jai")
+
+---
+
+## 2. Authentication
+
+Spring wraps the Principal inside an Authentication object.
+
+Authentication contains:
+
+* Principal (user)
+* Credentials (password/JWT)
+* Authorities (roles/permissions)
+* Authenticated status
+
+Example:
+
+Authentication
+├── Principal = jai
+├── Credentials = ********
+├── Authorities = ROLE_ADMIN
+└── Authenticated = true
+
+Key Point:
+
+Authentication = Everything Spring knows about the logged-in user.
+
+---
+
+## 3. SecurityContext
+
+SecurityContext is a container that stores the Authentication object.
+
+Example:
+
+SecurityContext
+└── Authentication
+└── Principal
+
+Key Point:
+
+SecurityContext = Storage box for Authentication.
+
+---
+
+## Accessing the Current User
+
+Get Authentication:
+
+Authentication auth =
+SecurityContextHolder
+.getContext()
+.getAuthentication();
+
+Get Principal:
+
+Object principal =
+SecurityContextHolder
+.getContext()
+.getAuthentication()
+.getPrincipal();
+
+---
+
+## Request Flow
+
+Client Request
+|
+▼
+Security Filter Chain
+|
+▼
+Authentication Process
+|
+▼
+Authentication Object Created
+|
+▼
+Stored in SecurityContext
+|
+▼
+Controller Executes
+
+Important:
+
+The Security Filter Chain runs only once per request.
+
+The request:
+
+1. Enters the filter chain.
+2. Passes through all security filters.
+3. Reaches the controller if authentication/authorization succeeds.
+
+---
+
+## Real-World Analogy
+
+Employee = Principal
+
+ID Card = Authentication
+
+Wallet = SecurityContext
+
+Wallet
+└── ID Card
+└── Employee
+
+Therefore:
+
+* Principal = User
+* Authentication = User + Roles + Credentials + Auth Status
+* SecurityContext = Container storing Authentication
